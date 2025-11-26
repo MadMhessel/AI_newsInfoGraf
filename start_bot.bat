@@ -14,9 +14,26 @@ if %errorlevel% neq 0 (
     exit
 )
 
-:: Установка библиотек
-echo Устанавливаю необходимые библиотеки...
-pip install python-telegram-bot google-generativeai python-dotenv
+if not exist venv (
+    echo [INIT] Создаем изолированное окружение...
+    python -m venv venv
+    if %errorlevel% neq 0 (
+        echo [ERROR] Не удалось создать venv. Проверьте установку Python.
+        pause
+        exit /b
+    )
+    echo [OK] Окружение создано.
+)
+
+:: 2. АКТИВАЦИЯ ОКРУЖЕНИЯ
+call venv\Scripts\activate
+
+:: 3. УСТАНОВКА ЗАВИСИМОСТЕЙ ВНУТРЬ VENV
+echo [AUTO] Проверка и установка библиотек...
+python -m pip install --upgrade pip --disable-pip-version-check
+:: Добавляем Pillow для работы с изображениями
+pip install python-telegram-bot requests python-dotenv Pillow
+
 
 echo.
 echo ===================================================
