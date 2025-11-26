@@ -33,6 +33,7 @@ echo [AUTO] Проверка и установка библиотек...
 python -m pip install --upgrade pip --disable-pip-version-check
 :: Добавляем Pillow для работы с изображениями
 pip install python-telegram-bot requests python-dotenv Pillow
+pip install google-generativeai
 
 
 echo.
